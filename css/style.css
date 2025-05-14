@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "DM Sans", sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -156,7 +156,7 @@ nav ul li a:hover {
     height: 120px;
     clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
     overflow: hidden;
-    background-color: #8a8f98;
+    background-color: #1f2328;
     position: relative;
 }
 
@@ -166,16 +166,54 @@ nav ul li a:hover {
     object-fit: cover;
 }
 
+#acao .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 2fr));
+    gap: 20px;
+    text-align: center;
+    padding: 50px 0;
+}
+
+#acao .item{
+    background-color: #0f1923;
+    border: 1px solid #ff4655;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2 ease; box-shadow: 0.2  ease;
+    cursor: pointer;
+}
+
+#acao .item:hover{
+    transform:  translateY(-5px);
+    box-shadow: 0 4px 6px #ff4655;
+}
+
+#acoes .item:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 6px #ff4666;
+}
+
+#acoes .item p  {
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #fff;
+}
+
+#acoes .imgcard img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
 .imgcard {
     width: 70%;
-    border: 2px solid #ff4655;
-    border-radius: 10px;
     width: 100%;
     max-width: 600px; 
     height: 500px;    
     object-fit: cover;
     border-radius: 10px; 
-        
 }
 
 button:hover {
