@@ -238,6 +238,10 @@ footer {
     color: #8a8f98;
 }
 
+section{
+    scroll-margin-top: 107px;
+}
+
 @media (max-width: 675px) {
     header .container,
     .sobre-container {
@@ -261,5 +265,9 @@ footer {
 
     .imgcard {
         width: 90%;
+    }
+
+    #acao #aplicacoes{
+        scroll-margin-top: 500px;
     }
 }
