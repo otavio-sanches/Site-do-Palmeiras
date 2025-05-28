@@ -216,6 +216,72 @@ nav ul li a:hover {
     border-radius: 10px; 
 }
 
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+    margin: auto;
+    text-align: center;
+    color: #000;
+}
+
+.card {
+    max-width: 300px;
+}
+
+
+
+.card h3 {
+    margin-top: 0px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding:  10px 20px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal:target {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 8px 16px;
+    background: #dc3545;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
 button:hover {
     background-color: #e03b4e;
 }
