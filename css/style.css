@@ -6,11 +6,12 @@
 #8a8f98 - cinza claro
 */
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "DM Sans", sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -168,7 +169,7 @@ nav ul li a:hover {
 
 #acao .container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 2fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     text-align: center;
     padding: 50px 0;
@@ -230,8 +231,6 @@ nav ul li a:hover {
     max-width: 300px;
 }
 
-
-
 .card h3 {
     margin-top: 0px;
 }
@@ -245,6 +244,18 @@ nav ul li a:hover {
     text-decoration: none;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.container-btn2 {
+    margin-top: 1.3rem;
+}
+
+.container-btn3 {
+    margin-top: 1.3rem;
+}
+
+.container-btn4 {
+    margin-top: 1.3rem;
 }
 
 .modal {
