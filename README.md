@@ -1,2 +1,2 @@
-# Site-de-Valorant
-https://otavio-sanches.github.io/Site-de-Valorant/
+# Site-do-Palmeiras
+https://otavio-sanches.github.io/Site-do-Palmeiras/
