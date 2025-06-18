@@ -1,5 +1,5 @@
 /* Paleta Valorant
-#ff4655 - vermelho principal
+#009200 - verde principal
 #0f1923 - fundo escuro
 #1f2328 - cinza escuro
 #ffffff - branco
@@ -17,7 +17,7 @@
 
 body {
     background-color: #0f1923;
-    color: #ffffff;
+    color: #fff;
 }
 
 .container {
@@ -31,7 +31,7 @@ section {
 }
 
 header {
-    background-color: #1f2328;
+    background-color: #ffffff;
     padding: 15px;
     width: 100%;
     position: fixed;
@@ -50,7 +50,7 @@ header .container {
 .logo {
     font-size: 2em;
     font-weight: bold;
-    color: #ff4655;
+    color: #009200;
 }
 
 nav ul {
@@ -65,18 +65,18 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #ffffff;
+    color: #000;
     text-decoration: none;
     font-weight: bold;
 }
 
 nav ul li a:hover {
-    color: #ff4655;
+    color: #009200;
 }
 
 .banner {
     background: url(../img/banner.webp) no-repeat center/cover;
-    height: 400px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     margin-top: 90px;
@@ -90,14 +90,14 @@ nav ul li a:hover {
 
 .inicio {
     font-size: 2.5rem;
-    color: #ddd;
+    color: #000;
     text-shadow: 2px 2px 5px #b3b3b3;
 }
 
 #sobre {
     padding: 35px;
-    background-color: #1f2328;
-    color: #ffffff;
+    background-color: #ffff;
+    color: #0000;
 }
 
 .sobre-container {
@@ -118,12 +118,12 @@ nav ul li a:hover {
 .sobre-texto h1 {
     font-size: 1.8em;
     margin-bottom: 20px;
-    color: #ff4655;
+    color: #009200;
 }
 
 .sobre-texto h2 {
     margin-top: 15px;
-    color: #ff4655;
+    color: #009200;
     font-size: 1.4em;
 }
 
@@ -132,10 +132,11 @@ nav ul li a:hover {
     line-height: 1.6;
     text-align: justify;
     margin-top: 10px;
+    color: #000;
 }
 
 .sobre-texto a {
-    color: #ff4655;
+    color: #009200;
     text-decoration: none;
     font-size: 0.9em;
 }
@@ -177,7 +178,7 @@ nav ul li a:hover {
 
 #acao .item{
     background-color: #0f1923;
-    border: 1px solid #ff4655;
+    border: 1px solid #009200;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -187,12 +188,12 @@ nav ul li a:hover {
 
 #acao .item:hover{
     transform:  translateY(-5px);
-    box-shadow: 0 4px 6px #ff4655;
+    box-shadow: 0 4px 6px #009200;
 }
 
 #acoes .item:active {
     transform: scale(0.98);
-    box-shadow: 0 4px 6px #ff4666;
+    box-shadow: 0 4px 6px #009200;
 }
 
 #acoes .item p  {
