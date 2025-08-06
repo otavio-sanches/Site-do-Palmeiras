@@ -50,6 +50,12 @@ header .container {
 .logo {
     font-size: 2em;
     font-weight: bold;
+    text-decoration: none;
+    color: #009200;
+}
+
+.logo a{
+    text-decoration: none;
     color: #009200;
 }
 
@@ -76,6 +82,20 @@ nav ul li a:hover {
 
 .banner {
     background: url(../img/banner.webp) no-repeat center/cover;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 90px;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 30px;
+    color: #ffffff;
+    font-size: 1.3em;
+    text-shadow: 2px 2px 5px #000;
+}
+
+.banner2 {
+    background: url(../img/banner2.jpg) no-repeat center/cover;
     height: 550px;
     display: flex;
     flex-direction: column;
@@ -341,6 +361,47 @@ button:hover {
 .galeria img:hover { 
     transform: scale(1.05); 
 }
+
+.formulario-contato {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    margin-top: 40px;
+    color: #009200;
+  }
+  
+  .grupo-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    text-align: left;
+  }
+  
+  .grupo-form input,
+  .grupo-form select,
+  .grupo-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    margin-top: 8px;
+  }
+  
+  .grupo-form input[type="checkbox"],
+  .grupo-form input[type="radio"] {
+    margin-right: 8px;
+    margin-top: 0;
+  }
+  
+  .grupo-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
 
 #contato ul {
     list-style: none;
