@@ -27,7 +27,7 @@ body {
 }
 
 section {
-    scroll-margin-top: 90px;
+    scroll-margin-top: 150px;
 }
 
 header {
@@ -47,16 +47,9 @@ header .container {
     flex-wrap: wrap;
 }
 
-.logo {
-    font-size: 2em;
-    font-weight: bold;
-    text-decoration: none;
-    color: #009200;
-}
-
-.logo a{
-    text-decoration: none;
-    color: #009200;
+.logo img {
+    width: 90px;
+    height: 90px;
 }
 
 nav ul {
@@ -155,13 +148,9 @@ nav ul li a:hover {
     color: #000;
 }
 
-.sobre-texto a {
+.fonte {
     color: #009200;
     text-decoration: none;
-    font-size: 0.9em;
-}
-
-.fonte {
     font-size: 0.9em;
 }
 
@@ -309,7 +298,7 @@ nav ul li a:hover {
 }
 .modal-content {
     background: #fff;
-    padding: 30px;
+    padding: 50px;
     border-radius: 10px;
     max-width: 600px;
     text-align: center;
@@ -317,7 +306,8 @@ nav ul li a:hover {
     max-height: 80vh;
     overflow-y: auto;
     text-align: justify;
-    margin-top: 120px;
+    margin-top: 230px;
+    margin-bottom: 90px;
 }
 
 .link{
@@ -420,6 +410,49 @@ button:hover {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.tabela-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabela-container table {
+  min-width: 600px;
+}
+.tabela-bra {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabela-bra th, 
+.tabela-bra td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ffff;
+}
+
+.tabela-bra thead {
+  background: linear-gradient(90deg, #00ff4c, #009200 );
+  color: #000;
+  font-weight: bold;
+}
+
+.tabela-bra tbody tr:hover {
+  background-color: rgba(0, 255, 224, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.tabela-bra tbody tr:last-child td {
+  border-bottom: none;
+}
+
 
 footer {
     background-color: #fff;
