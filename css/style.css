@@ -148,10 +148,16 @@ nav ul li a:hover {
     color: #000;
 }
 
-.fonte {
+.sobre-texto a{
     color: #009200;
     text-decoration: none;
     font-size: 0.9em;
+}
+
+.fonte a{
+    color: #009200;
+    text-decoration: none;
+    font-size: 0.9em;    
 }
 
 .hex-grid {
