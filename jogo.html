@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palmeiras</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+              <a href="index.html"><img src="img/favicon.png" alt="Logo do palmeiras"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#sobre">Sobre</a></li>
+                    <li><a href="index.html#titulos">Títulos</a></li>
+                    <li><a href="index.html#galeria">Galeria</a></li>
+                    <li><a href="jogo.html">Jogo</a></li>                   
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+        <div class="container">
+    
+            <div class="game-area">
+                <!-- Tela inicial -->
+                <div id="start-screen" class="screen active">
+                    <div class="welcome-card">
+                        <h2>Bem-vindo ao Quiz do Palmeiras!</h2>
+                        <p>Você conhece mesmo a história do maior campeão do Brasil?</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <span class="number">11</span>
+                                <span class="label">Brasileirões</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">4</span>
+                                <span class="label">Libertadores</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">1</span>
+                                <span class="label">Mundial</span>
+                            </div>
+                        </div>
+                        <button id="start-btn" class="btn btn-primary">Começar Quiz</button>
+                    </div>
+                </div>
+    
+                <!-- Tela do jogo -->
+                <div id="game-screen" class="screen">
+                    <div class="progress-bar">
+                        <div id="progress" class="progress-fill"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span id="question-number">Pergunta 1 de 10</span>
+                            <span id="score">Pontuação: 0</span>
+                        </div>
+                        
+                        <h3 id="question-text">Carregando pergunta...</h3>
+                        
+                        <div class="options">
+                            <button class="option-btn" data-option="0"></button>
+                            <button class="option-btn" data-option="1"></button>
+                            <button class="option-btn" data-option="2"></button>
+                            <button class="option-btn" data-option="3"></button>
+                        </div>
+                        
+                        <div id="feedback" class="feedback hidden">
+                            <p id="feedback-text"></p>
+                            <button id="next-btn" class="btn btn-secondary">Próxima Pergunta</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Tela de resultado -->
+                <div id="result-screen" class="screen">
+                    <div class="result-card">
+                        <h2 id="result-title">Parabéns!</h2>
+                        <div class="final-score">
+                            <span id="final-score">0</span>
+                            <span class="score-label">pontos</span>
+                        </div>
+                        <p id="result-message">Você é um verdadeiro palmeirense!</p>
+                        <div class="result-stats">
+                            <div class="stat">
+                                <span id="correct-answers">0</span>
+                                <span class="label">Acertos</span>
+                            </div>
+                            <div class="stat">
+                                <span id="wrong-answers">0</span>
+                                <span class="label">Erros</span>
+                            </div>
+                            <div class="stat">
+                                <span id="accuracy">0%</span>
+                                <span class="label">Precisão</span>
+                            </div>
+                        </div>
+                        <div class="result-actions">
+                            <button id="restart-btn" class="btn btn-primary">Jogar Novamente</button>
+                            <button id="share-btn" class="btn btn-secondary">Compartilhar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+<script>
+    // Perguntas do quiz sobre o Palmeiras
+const questions = [
+    {
+        question: "Em que ano o Palmeiras foi fundado?",
+        options: ["1914", "1915", "1916", "1917"],
+        correct: 0,
+        explanation: "O Palmeiras foi fundado em 26 de agosto de 1914 como Palestra Itália."
+    },
+    {
+        question: "Quantos títulos do Campeonato Brasileiro o Palmeiras possui?",
+        options: ["9", "10", "11", "12"],
+        correct: 3,
+        explanation: "O Palmeiras é o maior campeão brasileiro com 12 títulos nacionais."
+    },
+    {
+        question: "Qual é o estádio oficial do Palmeiras?",
+        options: ["Morumbi", "Allianz Parque", "Pacaembu", "Vila Belmiro"],
+        correct: 1,
+        explanation: "O Allianz Parque é a casa do Palmeiras desde 2014."
+    },
+    {
+        question: "Em que anos o Palmeiras conquistou a Libertadores consecutivamente?",
+        options: ["1998-1999", "1999-2000", "2020-2021", "2021-2022"],
+        correct: 2,
+        explanation: "O Palmeiras foi bicampeão da Libertadores em 2020 e 2021."
+    },
+    {
+        question: "Qual jogador é considerado o maior ídolo da história do Palmeiras?",
+        options: ["Ademir da Guia", "Rivaldo", "Marcos", "Dudu"],
+        correct: 0,
+        explanation: "Ademir da Guia é considerado o Divino Mestre e maior ídolo palmeirense."
+    },
+    {
+        question: "Quantas vezes o Palmeiras foi campeão mundial?",
+        options: ["1", "2", "3", "4"],
+        correct: 0,
+        explanation: "O Palmeiras foi campeão mundial em 1951, reconhecido pela FIFA."
+    },
+    {
+        question: "Qual é o apelido mais famoso do Palmeiras?",
+        options: ["Porco", "Verdão", "Palestra", "Alviverde"],
+        correct: 1,
+        explanation: "Verdão é o apelido mais carinhoso e usado pelos torcedores."
+    },
+    {
+        question: "Em que ano o Palmeiras conquistou seu primeiro Brasileirão?",
+        options: ["1972", "1973", "1974", "1975"],
+        correct: 1,
+        explanation: "O primeiro título brasileiro do Palmeiras foi em 1973."
+    },
+    {
+        question: "Qual foi o placar da final da Libertadores de 2021?",
+        options: ["1x0", "2x1", "3x0", "2x0"],
+        correct: 1,
+        explanation: "O Palmeiras venceu o Flamengo por 2x1 na final de 2021."
+    },
+    {
+        question: "Quantos gols Dudu marcou pelo Palmeiras até 2023?",
+        options: ["Mais de 80", "Mais de 90", "Mais de 100", "Mais de 110"],
+        correct: 2,
+        explanation: "Dudu ultrapassou a marca de 100 gols pelo Palmeiras."
+    }
+];
+
+// Variáveis do jogo
+let currentQuestion = 0;
+let score = 0;
+let correctAnswers = 0;
+let wrongAnswers = 0;
+let gameStarted = false;
+
+// Elementos do DOM
+const startScreen = document.getElementById('start-screen');
+const gameScreen = document.getElementById('game-screen');
+const resultScreen = document.getElementById('result-screen');
+const startBtn = document.getElementById('start-btn');
+const questionNumber = document.getElementById('question-number');
+const questionText = document.getElementById('question-text');
+const optionBtns = document.querySelectorAll('.option-btn');
+const feedback = document.getElementById('feedback');
+const feedbackText = document.getElementById('feedback-text');
+const nextBtn = document.getElementById('next-btn');
+const progress = document.getElementById('progress');
+const scoreElement = document.getElementById('score');
+const resultTitle = document.getElementById('result-title');
+const finalScore = document.getElementById('final-score');
+const resultMessage = document.getElementById('result-message');
+const correctAnswersElement = document.getElementById('correct-answers');
+const wrongAnswersElement = document.getElementById('wrong-answers');
+const accuracy = document.getElementById('accuracy');
+const restartBtn = document.getElementById('restart-btn');
+const shareBtn = document.getElementById('share-btn');
+
+// Event listeners
+startBtn.addEventListener('click', startGame);
+nextBtn.addEventListener('click', nextQuestion);
+restartBtn.addEventListener('click', restartGame);
+shareBtn.addEventListener('click', shareResult);
+
+optionBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => selectAnswer(index));
+});
+
+// Função para iniciar o jogo
+function startGame() {
+    gameStarted = true;
+    currentQuestion = 0;
+    score = 0;
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    
+    showScreen(gameScreen);
+    loadQuestion();
+}
+
+// Função para mostrar uma tela
+function showScreen(screen) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    screen.classList.add('active');
+}
+
+// Função para carregar uma pergunta
+function loadQuestion() {
+    const question = questions[currentQuestion];
+    
+    questionNumber.textContent = `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+    questionText.textContent = question.question;
+    scoreElement.textContent = `Pontuação: ${score}`;
+    
+    // Atualizar barra de progresso
+    const progressPercent = ((currentQuestion) / questions.length) * 100;
+    progress.style.width = `${progressPercent}%`;
+    
+    // Carregar opções
+    optionBtns.forEach((btn, index) => {
+        btn.textContent = question.options[index];
+        btn.classList.remove('correct', 'wrong', 'disabled');
+        btn.disabled = false;
+    });
+    
+    // Esconder feedback
+    feedback.classList.add('hidden');
+    feedback.classList.remove('correct', 'wrong');
+}
+
+// Função para selecionar uma resposta
+function selectAnswer(selectedIndex) {
+    const question = questions[currentQuestion];
+    const isCorrect = selectedIndex === question.correct;
+    
+    // Desabilitar todos os botões
+    optionBtns.forEach(btn => {
+        btn.classList.add('disabled');
+        btn.disabled = true;
+    });
+    
+    // Marcar resposta correta e incorreta
+    optionBtns[question.correct].classList.add('correct');
+    if (!isCorrect) {
+        optionBtns[selectedIndex].classList.add('wrong');
+    }
+    
+    // Atualizar pontuação e estatísticas
+    if (isCorrect) {
+        score += 10;
+        correctAnswers++;
+        feedback.classList.add('correct');
+        feedbackText.textContent = `Correto! ${question.explanation}`;
+    } else {
+        wrongAnswers++;
+        feedback.classList.add('wrong');
+        feedbackText.textContent = `Incorreto! ${question.explanation}`;
+    }
+    
+    // Mostrar feedback
+    feedback.classList.remove('hidden');
+    scoreElement.textContent = `Pontuação: ${score}`;
+}
+
+// Função para próxima pergunta
+function nextQuestion() {
+    currentQuestion++;
+    
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+// Função para mostrar resultados
+function showResults() {
+    const totalQuestions = questions.length;
+    const accuracyPercent = Math.round((correctAnswers / totalQuestions) * 100);
+    
+    // Atualizar elementos do resultado
+    finalScore.textContent = score;
+    correctAnswersElement.textContent = correctAnswers;
+    wrongAnswersElement.textContent = wrongAnswers;
+    accuracy.textContent = `${accuracyPercent}%`;
+    
+    // Mensagem baseada na performance
+    let message = "";
+    let title = "";
+    
+    if (accuracyPercent >= 90) {
+        title = "PALMEIRENSE RAIZ! 🏆";
+        message = "Você conhece tudo sobre o Verdão! Parabéns, você é um verdadeiro palmeirense!";
+    } else if (accuracyPercent >= 70) {
+        title = "MUITO BOM! 👏";
+        message = "Você tem um bom conhecimento sobre o Palmeiras! Continue acompanhando o Verdão!";
+    } else if (accuracyPercent >= 50) {
+        title = "PODE MELHORAR! 📚";
+        message = "Você sabe algumas coisas sobre o Palmeiras, mas pode estudar mais a história do clube!";
+    } else {
+        title = "PRECISA ESTUDAR! 📖";
+        message = "Que tal conhecer mais sobre a rica história do maior campeão do Brasil?";
+    }
+    
+    resultTitle.textContent = title;
+    resultMessage.textContent = message;
+    
+    // Atualizar barra de progresso para 100%
+    progress.style.width = '100%';
+    
+    showScreen(resultScreen);
+}
+
+// Função para reiniciar o jogo
+function restartGame() {
+    showScreen(startScreen);
+}
+
+// Função para compartilhar resultado
+function shareResult() {
+    const totalQuestions = questions.length;
+    const accuracyPercent = Math.round((correctAnswers / totalQuestions) * 100);
+    
+    const shareText = `Acabei de fazer o Quiz do Palmeiras! 🏆\n\nMinha pontuação: ${score} pontos\nAcertos: ${correctAnswers}/${totalQuestions}\nPrecisão: ${accuracyPercent}%\n\nVocê consegue fazer melhor? Teste seus conhecimentos sobre o Verdão! 💚`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Quiz do Palmeiras',
+            text: shareText,
+            url: window.location.href
+        });
+    } else {
+        // Fallback para navegadores que não suportam Web Share API
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert('Resultado copiado para a área de transferência!');
+        }).catch(() => {
+            // Fallback final
+            const textArea = document.createElement('textarea');
+            textArea.value = shareText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Resultado copiado para a área de transferência!');
+        });
+    }
+}
+
+// Adicionar efeitos sonoros (opcional)
+function playSound(type) {
+    // Aqui você pode adicionar sons para feedback
+    // Por exemplo, som de acerto, erro, etc.
+}
+
+// Animações adicionais
+function addConfetti() {
+    // Função para adicionar confetes na tela de resultado
+    // Pode ser implementada com uma biblioteca como canvas-confetti
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    // Garantir que a tela inicial está ativa
+    showScreen(startScreen);
+    
+    // Adicionar animação de entrada
+    setTimeout(() => {
+        document.querySelector('.welcome-card').style.transform = 'translateY(0)';
+        document.querySelector('.welcome-card').style.opacity = '1';
+    }, 100);
+});
+
+// Adicionar suporte a teclado
+document.addEventListener('keydown', (e) => {
+    if (!gameStarted) return;
+    
+    // Teclas 1-4 para selecionar opções
+    if (e.key >= '1' && e.key <= '4') {
+        const index = parseInt(e.key) - 1;
+        if (index < optionBtns.length && !optionBtns[index].disabled) {
+            selectAnswer(index);
+        }
+    }
+    
+    // Enter para próxima pergunta
+    if (e.key === 'Enter' && !feedback.classList.contains('hidden')) {
+        nextQuestion();
+    }
+});
+
+</script>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #006633 0%, #004d26 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+.logo p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.game-area {
+    position: relative;
+    min-height: 500px;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Tela inicial */
+.welcome-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #006633;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-card h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #006633;
+}
+
+.welcome-card p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #004d26;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    padding: 20px 0;
+    border-top: 2px solid #006633;
+    border-bottom: 2px solid #006633;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat .number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #006633;
+}
+
+.stat .label {
+    font-size: 0.9rem;
+    color: #004d26;
+    margin-top: 5px;
+}
+
+/* Botões */
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    background: #006633;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #004d26;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 102, 51, 0.4);
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: #006633;
+    border: 2px solid #006633;
+}
+
+.btn-secondary:hover {
+    background: #006633;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Tela do jogo */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #ffffff;
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.question-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #006633;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #004d26;
+}
+
+#question-text {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: #006633;
+}
+
+.options {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    padding: 15px 20px;
+    border: 2px solid #006633;
+    background: white;
+    color: #006633;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.option-btn:hover {
+    background: #f0f8f0;
+    transform: translateX(5px);
+}
+
+.option-btn.correct {
+    background: #006633;
+    color: white;
+    border-color: #004d26;
+}
+
+.option-btn.wrong {
+    background: #cc0000;
+    color: white;
+    border-color: #990000;
+}
+
+.option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.feedback {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.feedback.correct {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.feedback.wrong {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.feedback.hidden {
+    display: none;
+}
+
+/* Tela de resultado */
+.result-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #006633;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.result-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #006633;
+}
+
+.final-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
+#final-score {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #006633;
+}
+
+.score-label {
+    font-size: 1.2rem;
+    color: #004d26;
+    margin-top: 5px;
+}
+
+#result-message {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    color: #004d26;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    padding: 20px 0;
+    border-top: 2px solid #006633;
+    border-bottom: 2px solid #006633;
+}
+
+.result-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    opacity: 0.8;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    .welcome-card, .question-card, .result-card {
+        padding: 25px;
+    }
+    
+    .stats, .result-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .result-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+    
+    .welcome-card, .question-card, .result-card {
+        padding: 20px;
+    }
+    
+    #question-text {
+        font-size: 1.2rem;
+    }
+    
+    .option-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+</style>
