@@ -134,7 +134,7 @@ const questions = [
         explanation: "O Allianz Parque é a casa do Palmeiras desde 2014."
     },
     {
-        question: "Em que anos o Palmeiras conquistou a Libertadores consecutivamente?",
+        question: "Em quais anos o Palmeiras conquistou a Libertadores consecutivamente?",
         options: ["1998-1999", "1999-2000", "2020-2021", "2021-2022"],
         correct: 2,
         explanation: "O Palmeiras foi bicampeão da Libertadores em 2020 e 2021."
@@ -147,8 +147,8 @@ const questions = [
     },
     {
         question: "Quantas vezes o Palmeiras foi campeão mundial?",
-        options: ["1", "2", "3", "4"],
-        correct: 0,
+        options: ["0", "1", "2", "3"],
+        correct: 1,
         explanation: "O Palmeiras foi campeão mundial em 1951, reconhecido pela FIFA."
     },
     {
@@ -462,6 +462,7 @@ header {
 .game-area {
     position: relative;
     min-height: 500px;
+    margin-top: 200px;
 }
 
 .screen {
@@ -757,6 +758,10 @@ footer {
     .btn {
         padding: 12px 25px;
         font-size: 1rem;
+    }
+
+    .game-area{
+        margin-top: 300px;
     }
 }
 
